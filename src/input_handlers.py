@@ -1,6 +1,6 @@
 from typing import Optional
 
-import tcod
+import tcod.event
 
 from actions import MovementAction, Action, EscapeAction
 
@@ -39,44 +39,15 @@ MOVE_KEYS = {  # key_symbol: (x, y)
 
 
 class InputHandler(tcod.event.EventDispatch[Action]):
-    """A state-based superclass that converts `events` into `commands`.
-
-    The configuration used to convert events to commands are hard-coded
-    in this example, but could be modified to be user controlled.
-
-    Subclasses will override the `cmd_*` methods with their own
-    functionality.  There could be a subclass for every individual state
-    of your game.
-    """
 
     def ev_quit(self, event: tcod.event.Quit) -> None:
-        """The window close button was clicked or Alt+F$ was pressed."""
-        print(event)
-        self.cmd_quit()
+        """The window close button was clicked or Alt+F4 was pressed."""
+        print("Window close button pressed.")
+        raise SystemExit()
 
     def ev_keydown(self, event: tcod.event.KeyDown) -> Optional[Action]:
         """A key was pressed."""
         if event.sym in MOVE_KEYS:
-            return self.cmd_move(*MOVE_KEYS[event.sym])
+            return MovementAction(*MOVE_KEYS[event.sym])
         elif event.sym == tcod.event.K_ESCAPE:
-            return self.cmd_escape()
-
-    def ev_mousebuttondown(self, event: tcod.event.MouseButtonDown) -> None:
-        """The window was clicked."""
-        # print(event)
-
-    def ev_mousemotion(self, event: tcod.event.MouseMotion) -> None:
-        """The mouse has moved within the window."""
-        # print(event)
-
-    def cmd_move(self, x: int, y: int) -> MovementAction:
-        """Intent to move: `x` and `y` is the direction, both may be 0."""
-        return MovementAction(x, y)
-
-    def cmd_escape(self) -> EscapeAction:
-        """Intent to exit this state."""
-        print("Command escape.")
-        return self.cmd_quit()
-
-    def cmd_quit(self) -> EscapeAction:
-        return EscapeAction()
+            return EscapeAction()

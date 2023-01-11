@@ -1,7 +1,7 @@
 import tcod
 
-from src.actions import EscapeAction, MovementAction
-from src.input_handlers import InputHandler
+from actions import MovementAction, EscapeAction
+from input_handlers import InputHandler
 
 
 def main() -> None:
@@ -35,14 +35,14 @@ def main() -> None:
                 if action is None:
                     continue
 
-                print(isinstance(action, MovementAction))
-                print(type(action))
                 if isinstance(action, MovementAction):
                     player_x += action.dx
                     player_y += action.dy
 
                 elif isinstance(action, EscapeAction):
                     raise SystemExit()
+
+                root_console.clear()
 
 
 if __name__ == "__main__":

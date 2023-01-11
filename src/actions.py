@@ -1,6 +1,3 @@
-from dataclasses import dataclass
-
-
 class Action:
     pass
 
@@ -9,7 +6,8 @@ class EscapeAction(Action):
     pass
 
 
-@dataclass
 class MovementAction(Action):
-    dx: int
-    dy: int
+    def __init__(self, dx: int, dy: int):
+        super().__init__()
+        self.dx = dx
+        self.dy = dy
