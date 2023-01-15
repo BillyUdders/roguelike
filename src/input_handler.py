@@ -2,7 +2,7 @@ from typing import Optional
 
 import tcod.event
 
-from src.types.actions import MovementAction, Action, EscapeAction
+from src.types.actions import EscapeAction, Action, MovementAction
 
 MOVE_KEYS = {  # key_symbol: (x, y)
     # Arrow keys.

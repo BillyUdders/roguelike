@@ -11,7 +11,7 @@ def main() -> None:
     screen_height = 50
 
     tileset = tcod.tileset.load_tilesheet(
-        "dejavu10x10_gs_tc.png", 32, 8, tcod.tileset.CHARMAP_TCOD
+        "./src/dejavu10x10_gs_tc.png", 32, 8, tcod.tileset.CHARMAP_TCOD
     )
 
     game_map = Map(screen_width, screen_height)
