@@ -1,18 +1,21 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
-from src.types.entity import Entity
+if TYPE_CHECKING:
+    from src.types.entity import Entity
+    from src.engine import Engine
 
 
 class Action(ABC):
     @abstractmethod
-    def perform(self, engine, entity: Entity):
+    def perform(self, engine: "Engine", entity: "Entity"):
         raise NotImplementedError()
 
 
 @dataclass
 class EscapeAction(Action):
-    def perform(self, engine, entity: Entity):
+    def perform(self, engine: "Engine", entity: "Entity"):
         raise SystemExit()
 
 
@@ -21,7 +24,7 @@ class MovementAction(Action):
     dx: int
     dy: int
 
-    def perform(self, engine, entity: Entity):
+    def perform(self, engine: "Engine", entity: "Entity"):
         dest_x = entity.x + self.dx
         dest_y = entity.y + self.dy
 
