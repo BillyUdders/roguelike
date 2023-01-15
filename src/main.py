@@ -1,21 +1,23 @@
 import tcod
 
-from actions import MovementAction, EscapeAction
-from input_handlers import InputHandler
+from input_handler import InputHandler
+from src.engine import Engine
+from src.map import Map
+from src.types.entity import Entity
 
 
 def main() -> None:
     screen_width = 80
     screen_height = 50
 
-    player_x = int(screen_width / 2)
-    player_y = int(screen_height / 2)
-
     tileset = tcod.tileset.load_tilesheet(
         "dejavu10x10_gs_tc.png", 32, 8, tcod.tileset.CHARMAP_TCOD
     )
 
-    input_handler = InputHandler()
+    game_map = Map(screen_width, screen_height)
+    player = Entity(int(screen_width / 2), int(screen_height / 2), "@", (255, 255, 255))
+    npc = Entity(int(screen_width / 2 - 5), int(screen_height / 2), "@", (255, 255, 0))
+    engine = Engine(entities=[npc, player], event_handler=InputHandler(), game_map=game_map, player=player)
 
     with tcod.context.new_terminal(
             screen_width,
@@ -26,23 +28,9 @@ def main() -> None:
     ) as context:
         root_console = tcod.Console(screen_width, screen_height, order="F")
         while True:
-            root_console.print(x=player_x, y=player_y, string="@")
-
-            context.present(root_console)
-
-            for event in tcod.event.wait():
-                action = input_handler.dispatch(event)
-                if action is None:
-                    continue
-
-                if isinstance(action, MovementAction):
-                    player_x += action.dx
-                    player_y += action.dy
-
-                elif isinstance(action, EscapeAction):
-                    raise SystemExit()
-
-                root_console.clear()
+            engine.render(console=root_console, context=context)
+            events = tcod.event.wait()
+            engine.handle_events(events)
 
 
 if __name__ == "__main__":

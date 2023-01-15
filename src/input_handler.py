@@ -2,7 +2,7 @@ from typing import Optional
 
 import tcod.event
 
-from actions import MovementAction, Action, EscapeAction
+from src.types.actions import MovementAction, Action, EscapeAction
 
 MOVE_KEYS = {  # key_symbol: (x, y)
     # Arrow keys.
@@ -40,10 +40,9 @@ MOVE_KEYS = {  # key_symbol: (x, y)
 
 class InputHandler(tcod.event.EventDispatch[Action]):
 
-    def ev_quit(self, event: tcod.event.Quit) -> None:
+    def ev_quit(self, event: tcod.event.Quit) -> EscapeAction:
         """The window close button was clicked or Alt+F4 was pressed."""
-        print("Window close button pressed.")
-        raise SystemExit()
+        return EscapeAction()
 
     def ev_keydown(self, event: tcod.event.KeyDown) -> Optional[Action]:
         """A key was pressed."""
