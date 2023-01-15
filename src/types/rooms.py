@@ -1,12 +1,19 @@
+from dataclasses import dataclass, field
 from typing import Tuple
 
 
+@dataclass
 class RectangularRoom:
-    def __init__(self, x: int, y: int, width: int, height: int):
-        self.x1 = x
-        self.y1 = y
-        self.x2 = x + width
-        self.y2 = y + height
+    x1: int
+    y1: int
+    width: int
+    height: int
+    x2: int = field(init=False)
+    y2: int = field(init=False)
+
+    def __post_init__(self):
+        self.x2 = self.x1 + self.width
+        self.y2 = self.y1 + self.height
 
     @property
     def center(self) -> Tuple[int, int]:
