@@ -26,3 +26,12 @@ class RectangularRoom:
     def inner(self) -> tuple[slice, slice]:
         """Return the inner area of this room as a 2D array index."""
         return slice(self.x + 1, self.x2), slice(self.y + 1, self.y2)
+
+    def intersects(self, other: "RectangularRoom") -> bool:
+        """Return True if this room overlaps with another RectangularRoom."""
+        return (
+            self.x <= other.x2
+            and self.x2 >= other.x
+            and self.y <= other.y2
+            and self.y2 >= other.y
+        )
