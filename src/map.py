@@ -13,7 +13,9 @@ class Map:
     tiles: np.array = field(init=False)
 
     def __post_init__(self):
-        self.tiles = np.full((self.width, self.height), fill_value=tiles.wall, order="F")
+        self.tiles = np.full(
+            (self.width, self.height), fill_value=tiles.wall, order="F"
+        )
 
     def in_bounds(self, x: int, y: int) -> bool:
         return 0 <= x < self.width and 0 <= y < self.height

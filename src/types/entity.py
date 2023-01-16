@@ -8,6 +8,7 @@ class Entity:
     """
     A generic object to represent players, enemies, items, etc.
     """
+
     x: int = field(hash=True)
     y: int = field(hash=True)
     char: str

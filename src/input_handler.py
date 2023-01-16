@@ -39,7 +39,6 @@ MOVE_KEYS = {  # key_symbol: (x, y)
 
 
 class InputHandler(tcod.event.EventDispatch[Action]):
-
     def ev_quit(self, event: tcod.event.Quit) -> EscapeAction:
         """The window close button was clicked or Alt+F4 was pressed."""
         return EscapeAction()
