@@ -3,9 +3,9 @@ from collections.abc import Iterator
 
 import tcod
 
+from src.datatypes import tiles
+from src.datatypes.rooms import RectangularRoom
 from src.map import Map
-from src.types import tiles
-from src.types.rooms import RectangularRoom
 
 Coordinates = tuple[int, int]
 
@@ -31,6 +31,9 @@ def generate_dungeon(map_width, map_height) -> Map:
 
     room_1 = RectangularRoom(x=20, y=15, width=10, height=15)
     room_2 = RectangularRoom(x=35, y=15, width=10, height=15)
+
+    for x, y in tunnel_between(room_2.center, room_1.center):
+        dungeon.tiles[x, y] = tiles.floor
 
     dungeon.tiles[room_1.inner] = tiles.floor
     dungeon.tiles[room_2.inner] = tiles.floor

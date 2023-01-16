@@ -1,8 +1,6 @@
-from typing import Tuple
-
 import numpy as np  # type: ignore
 
-from src.types.common import Color
+from src.datatypes.common import Color
 
 # Tile graphics structured type compatible with Console.tiles_rgb.
 graphic_dt = np.dtype(
@@ -25,9 +23,9 @@ tile_dt = np.dtype(
 
 # Enforce the use of keywords, so that parameter order doesn't matter.
 def new_tile(
-    *, walkable: int, transparent: int, dark: Tuple[int, Color, Color]
+    *, walkable: int, transparent: int, dark: tuple[int, Color, Color]
 ) -> np.ndarray:
-    """Helper function for defining individual tile types"""
+    """Helper function for defining individual tile datatypes"""
     return np.array((walkable, transparent, dark), dtype=tile_dt)
 
 

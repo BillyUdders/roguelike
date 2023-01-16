@@ -1,18 +1,19 @@
+from collections.abc import Iterable
 from dataclasses import dataclass
-from typing import Iterable, Any, List
+from typing import Any
 
 from tcod.console import Console
 from tcod.context import Context
 
+from src.datatypes.actions import Action
+from src.datatypes.entity import Entity
 from src.input_handler import InputHandler
 from src.map import Map
-from src.types.actions import Action
-from src.types.entity import Entity
 
 
 @dataclass
 class Engine:
-    entities: List[Entity]
+    entities: list[Entity]
     event_handler: InputHandler
     game_map: Map
     player: Entity

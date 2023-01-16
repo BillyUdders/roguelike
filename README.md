@@ -16,4 +16,6 @@ brew install python # install python 3.11 with pyenv, brew, asdf etc.
 python -m venv /path/to/new/virtual/environment # wherever your virtualenv is
 pip install -r requirements.txt # install TCOD and friends
 pre-commit install --install-hooks # for static analysis and code coverage
+export PYTHONPATH=${PYTHONPATH}:${pwd}/src # so python can see the module
+python src/main.py # Allez allez
 ```

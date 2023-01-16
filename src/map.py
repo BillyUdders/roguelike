@@ -4,7 +4,7 @@ from dataclasses import field
 import numpy as np
 from tcod.console import Console
 
-from src.types import tiles
+from src.datatypes import tiles
 
 
 @dataclass

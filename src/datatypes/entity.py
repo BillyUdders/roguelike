@@ -1,6 +1,7 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
+from dataclasses import field
 
-from src.types.common import Color
+from src.datatypes.common import Color
 
 
 @dataclass(eq=True)

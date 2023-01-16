@@ -1,9 +1,9 @@
 import tcod
-
 from input_handler import InputHandler
+
+from src.datatypes.entity import Entity
 from src.engine import Engine
 from src.procgen import generate_dungeon
-from src.types.entity import Entity
 
 
 def main() -> None:

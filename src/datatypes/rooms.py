@@ -1,5 +1,5 @@
-from dataclasses import dataclass, field
-from typing import Tuple
+from dataclasses import dataclass
+from dataclasses import field
 
 
 @dataclass
@@ -16,13 +16,13 @@ class RectangularRoom:
         self.y2 = self.y + self.height
 
     @property
-    def center(self) -> Tuple[int, int]:
+    def center(self) -> tuple[int, int]:
         center_x = int((self.x + self.x2) / 2)
         center_y = int((self.y + self.y2) / 2)
 
         return center_x, center_y
 
     @property
-    def inner(self) -> Tuple[slice, slice]:
+    def inner(self) -> tuple[slice, slice]:
         """Return the inner area of this room as a 2D array index."""
         return slice(self.x + 1, self.x2), slice(self.y + 1, self.y2)
