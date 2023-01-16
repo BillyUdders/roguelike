@@ -1,5 +1,5 @@
 import random
-from typing import Tuple, Iterator
+from collections.abc import Iterator
 
 import tcod
 
@@ -7,10 +7,10 @@ from src.map import Map
 from src.types import tiles
 from src.types.rooms import RectangularRoom
 
+Coordinates = tuple[int, int]
 
-def tunnel_between(
-    start: Tuple[int, int], end: Tuple[int, int]
-) -> Iterator[Tuple[int, int]]:
+
+def tunnel_between(start: Coordinates, end: Coordinates) -> Iterator[Coordinates]:
     """Return an L-shaped tunnel between these two points."""
     x1, y1 = start
     x2, y2 = end
@@ -22,10 +22,8 @@ def tunnel_between(
         corner_x, corner_y = x1, y2
 
     # Generate the coordinates for this tunnel.
-    for x, y in tcod.los.bresenham((x1, y1), (corner_x, corner_y)).tolist():
-        yield x, y
-    for x, y in tcod.los.bresenham((corner_x, corner_y), (x2, y2)).tolist():
-        yield x, y
+    yield from tcod.los.bresenham((x1, y1), (corner_x, corner_y)).tolist()
+    yield from tcod.los.bresenham((corner_x, corner_y), (x2, y2)).tolist()
 
 
 def generate_dungeon(map_width, map_height) -> Map:

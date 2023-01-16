@@ -1,4 +1,5 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
+from dataclasses import field
 
 import numpy as np
 from tcod.console import Console
@@ -21,4 +22,4 @@ class Map:
         return 0 <= x < self.width and 0 <= y < self.height
 
     def render(self, console: Console) -> None:
-        console.tiles_rgb[0:self.width, 0:self.height] = self.tiles["dark"]
+        console.tiles_rgb[0 : self.width, 0 : self.height] = self.tiles["dark"]

@@ -6,25 +6,23 @@ exclude: '^.txt$'
 fail_fast: false
 minimum_pre_commit_version: '0'
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.3.0
-    hooks:
-      - id: check-yaml
-      - id: end-of-file-fixer
-      - id: trailing-whitespace
-  - repo: https://github.com/psf/black
-    rev: 19.3b0
-    hooks:
-      - id: black
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.19.4
+    rev: v3.3.1
     hooks:
       - id: pyupgrade
         args:
           - --py3-plus
-          - --py36-plus
+          - --py311-plus
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.0.0
+    hooks:
+      - id: flake8
+  - repo: https://github.com/psf/black
+    rev: 22.12.0
+    hooks:
+      - id: black
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
+    rev: v4.4.0
     hooks:
       - id: check-added-large-files
         args: [ "--maxkb=500" ]
@@ -44,25 +42,8 @@ repos:
       - id: check-yaml
         args:
           - --allow-multiple-documents
-  - repo: https://github.com/pycqa/bandit
-    rev: 1.7.0
-    hooks:
-      - id: bandit
-        args: [ --exclude, tests ]
-  - repo: https://github.com/psf/black
-    rev: 21.6b0
-    hooks:
-      - id: black
-  - repo: https://github.com/pycqa/flake8
-    rev: 3.9.2
-    hooks:
-      - id: flake8
-  - repo: https://github.com/pycqa/pydocstyle
-    rev: 6.1.1
-    hooks:
-      - id: pydocstyle
   - repo: https://github.com/asottile/reorder_python_imports
-    rev: v2.5.0
+    rev: v3.9.0
     hooks:
       - id: reorder-python-imports
         name: Reorder Python imports
