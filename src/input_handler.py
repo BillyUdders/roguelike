@@ -1,10 +1,8 @@
-from typing import Optional
-
 import tcod.event
 
 from src.datatypes.actions import Action
+from src.datatypes.actions import BumpAction
 from src.datatypes.actions import EscapeAction
-from src.datatypes.actions import MovementAction
 
 MOVE_KEYS = {  # key_symbol: (x, y)
     # Arrow keys.
@@ -48,6 +46,6 @@ class InputHandler(tcod.event.EventDispatch[Action]):
     def ev_keydown(self, event: tcod.event.KeyDown) -> Action | None:
         """A key was pressed."""
         if event.sym in MOVE_KEYS:
-            return MovementAction(*MOVE_KEYS[event.sym])
+            return BumpAction(*MOVE_KEYS[event.sym])
         elif event.sym == tcod.event.K_ESCAPE:
             return EscapeAction()
