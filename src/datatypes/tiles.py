@@ -17,25 +17,33 @@ tile_dt = np.dtype(
         ("walkable", np.bool_),  # True if this tile can be walked over.
         ("transparent", np.bool_),  # True if this tile doesn't block FOV.
         ("dark", graphic_dt),  # Graphics for when this tile is not in FOV.
+        ("light", graphic_dt),  # Graphics for when the tile is in FOV.
     ]
 )
 
 
 # Enforce the use of keywords, so that parameter order doesn't matter.
 def new_tile(
-    *, walkable: int, transparent: int, dark: tuple[int, Color, Color]
+    *,
+    walkable: int,
+    transparent: int,
+    dark: tuple[int, Color, Color],
+    light: tuple[int, Color, Color]
 ) -> np.ndarray:
     """Helper function for defining individual tile datatypes"""
-    return np.array((walkable, transparent, dark), dtype=tile_dt)
+    return np.array((walkable, transparent, dark, light), dtype=tile_dt)
 
 
+SHROUD = np.array((ord(" "), (255, 255, 255), (0, 0, 0)), dtype=graphic_dt)
 floor = new_tile(
     walkable=True,
     transparent=True,
     dark=(ord(" "), (255, 255, 255), (50, 50, 150)),
+    light=(ord(" "), (255, 255, 255), (200, 180, 50)),
 )
 wall = new_tile(
     walkable=False,
     transparent=False,
     dark=(ord(" "), (255, 255, 255), (0, 0, 100)),
+    light=(ord(" "), (255, 255, 255), (130, 110, 50)),
 )
