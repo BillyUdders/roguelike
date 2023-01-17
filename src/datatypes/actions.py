@@ -20,7 +20,7 @@ class ActionWithDirection(Action, metaclass=ABCMeta):
     dx: int
     dy: int
 
-    def perform(self, engine: Engine, entity: Entity):
+    def perform(self, engine: "Engine", entity: "Entity"):
         raise NotImplementedError()
 
 
@@ -42,7 +42,7 @@ class MovementAction(ActionWithDirection):
 
 @dataclass
 class MeleeAction(ActionWithDirection):
-    def perform(self, engine: Engine, entity: Entity) -> None:
+    def perform(self, engine: "Engine", entity: "Entity") -> None:
         dest_x = entity.x + self.dx
         dest_y = entity.y + self.dy
         target = engine.game_map.get_blocking_entity_at_location(dest_x, dest_y)
@@ -54,7 +54,7 @@ class MeleeAction(ActionWithDirection):
 
 @dataclass
 class BumpAction(ActionWithDirection):
-    def perform(self, engine: Engine, entity: Entity) -> None:
+    def perform(self, engine: "Engine", entity: "Entity") -> None:
         dest_x = entity.x + self.dx
         dest_y = entity.y + self.dy
 

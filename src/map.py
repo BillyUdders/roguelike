@@ -1,6 +1,7 @@
 from collections.abc import MutableSequence
 from dataclasses import dataclass
 from dataclasses import field
+from typing import Optional
 from typing import TYPE_CHECKING
 
 import numpy as np
@@ -30,7 +31,7 @@ class Map:
 
     def get_blocking_entity_at_location(
         self, location_x: int, location_y: int
-    ) -> Entity | None:
+    ) -> Optional["Entity"]:
         for entity in self.entities:
             if (
                 entity.blocks_movement
