@@ -1,4 +1,4 @@
-from collections.abc import Iterable
+from collections.abc import MutableSequence
 from dataclasses import dataclass
 from dataclasses import field
 from typing import TYPE_CHECKING
@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 class Map:
     width: int
     height: int
-    entities: Iterable[Entity]
+    entities: MutableSequence["Entity"]
 
     tiles: np.array = field(init=False)
     visible: np.array = field(init=False)
