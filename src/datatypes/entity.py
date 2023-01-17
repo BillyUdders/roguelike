@@ -36,5 +36,5 @@ class Entity:
         clone = copy.deepcopy(self)
         clone.x = x
         clone.y = y
-        gamemap.entities.append(clone)
+        gamemap.entities.add(clone)
         return clone
